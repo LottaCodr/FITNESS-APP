@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:the_trainer/widgets/the_barchart.dart';
+import 'package:the_trainer/widgets/chart/chart_container.dart';
+import 'package:the_trainer/widgets/chart/the_barchart.dart';
 import 'package:the_trainer/widgets/the_card.dart';
 import 'package:the_trainer/widgets/the_circle.dart';
+import 'package:fl_chart/fl_chart.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -86,7 +88,43 @@ class _HomePageState extends State<HomePage> {
                     fontSize: 15,
                   ),
                 ),
-
+                SizedBox(
+                    height: 200,
+                    child: ChartContainer(
+                        title: "Track Your Day",
+                        color: Colors.red,
+                        chart: BarChartContent())
+                    // LineChart(
+                    //   LineChartData(
+                    //     //defining the chart data here
+                    //     lineBarsData: [
+                    //       LineChartBarData(
+                    //         spots: [
+                    //           FlSpot(0, 0),
+                    //           FlSpot(1, 5),
+                    //           FlSpot(2, 3),
+                    //           FlSpot(3, 7),
+                    //           FlSpot(4, 10),
+                    //         ],
+                    //
+                    //         //customizing the appearance of the line
+                    //         color: Colors.red,
+                    //         barWidth: 2
+                    //       ),
+                    //     ],
+                    //
+                    //     //customizing the x and y axes
+                    //     titlesData: FlTitlesData(
+                    //       bottomTitles: AxisTitles(
+                    //         sideTitles: SideTitles(
+                    //           showTitles: true,
+                    //
+                    //         )
+                    //       )
+                    //     )
+                    //   ),
+                    // ),
+                    ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

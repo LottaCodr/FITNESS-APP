@@ -84,7 +84,9 @@ class _WorkoutInfoState extends State<WorkoutInfo> {
                         the2ndText: 'workout',
                         lastText: 'completed'),
                     TheCircle(
-                        mainText: '9', the2ndText: 'training', lastText: 'hours'),
+                        mainText: '9',
+                        the2ndText: 'training',
+                        lastText: 'hours'),
                     TheCircle(
                         mainText: '897',
                         the2ndText: 'calories',
