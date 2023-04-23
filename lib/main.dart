@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:the_trainer/widgets/navbar.dart';
+import 'package:the_trainer/workout_info.dart';
 
 import 'home_page.dart';
 
@@ -12,12 +15,17 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.red,
+        brightness: Brightness.dark,
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+          selectedItemColor: Colors.red
+        )
       ),
-      home: const HomePage(),
+      home:  const MyBottomNavBar(),
     );
   }
 }

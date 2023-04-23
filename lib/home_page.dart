@@ -1,7 +1,7 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'colors.dart' as color;
+import 'package:the_trainer/widgets/the_barchart.dart';
+import 'package:the_trainer/widgets/the_card.dart';
+import 'package:the_trainer/widgets/the_circle.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -11,377 +11,127 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List info =[];
-
-  _initData(){
-    DefaultAssetBundle.of(context).loadString('jsos/info.json').then((value)
-    {
-    json.decode(value);
-    });
-  }
-
-@override
-  void initState() {
-    super.initState();
-    _initData();
-  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: color.AppColor.homePageBackground,
-      body: Container(
-        padding: const EdgeInsets.only(top: 70, left: 30, right: 30),
-        child: Column(
-          children: [
-            Row(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Training',
-                  style: TextStyle(
-                      fontSize: 30,
-                      color: color.AppColor.homePageTitle,
-                      fontWeight: FontWeight.w700),
-                ),
-                Expanded(child: Container()),
-                Icon(
-                  Icons.arrow_back_ios,
-                  size: 20,
-                  color: color.AppColor.homePageIcons,
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                Icon(
-                  Icons.calculate_outlined,
-                  size: 20,
-                  color: color.AppColor.homePageIcons,
-                ),
-                const SizedBox(
-                  width: 15,
-                ),
-                Icon(
-                  Icons.arrow_forward_ios,
-                  size: 20,
-                  color: color.AppColor.homePageIcons,
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            Row(
-              children: [
-                Text(
-                  'Your Program',
-                  style: TextStyle(
-                      fontSize: 20,
-                      color: color.AppColor.homePageSubTitle,
-                      fontWeight: FontWeight.w700),
-                ),
-                Expanded(child: Container()),
-                Text(
-                  'Your Program',
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: color.AppColor.homePageDetail,
+                SizedBox(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: const [
+                      Text(
+                        'DashBoard',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 30,
+                        ),
+                      ),
+                      CircleAvatar(
+                        backgroundColor: Colors.white,
+                        radius: 35,
+                      ),
+                    ],
                   ),
                 ),
                 const SizedBox(
-                  width: 5,
+                  height: 40,
                 ),
-                Icon(
-                  Icons.arrow_forward,
-                  size: 20,
-                  color: color.AppColor.homePageIcons,
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: 220,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(colors: [
-                  color.AppColor.gradientFirst, //.withOpacity(0.8),
-                  color.AppColor.gradientSecond, //.withOpacity(0.9)
-                ], begin: Alignment.bottomLeft, end: Alignment.centerRight),
-                borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(10),
-                    bottomRight: Radius.circular(10),
-                    bottomLeft: Radius.circular(10),
-                    topRight: Radius.circular(80)),
-                boxShadow: [
-                  BoxShadow(
-                      offset: const Offset(5, 10),
-                      blurRadius: 20,
-                      color: color.AppColor.gradientSecond.withOpacity(1)),
-                ],
-              ),
-              child: Container(
-                padding: const EdgeInsets.only(left: 20, top: 25, right: 20),
-                child: Column(
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Next Workout',
-                      style: TextStyle(
-                          fontSize: 16,
-                          color: color.AppColor.homePageContainerTextSmall),
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Text(
-                      'Legs Toning',
-                      style: TextStyle(
-                          fontSize: 25,
-                          color: color.AppColor.homePageContainerTextSmall),
-                    ),
-                    Text(
-                      'and Glutes Workout',
-                      style: TextStyle(
-                          fontSize: 25,
-                          color: color.AppColor.homePageContainerTextSmall),
-                    ),
-                    const SizedBox(
-                      height: 35,
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.timer_outlined,
-                              size: 20,
-                              color: color.AppColor.homePageContainerTextSmall,
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Text(
-                              '60 mins',
-                              style: TextStyle(
-                                  fontSize: 14,
-                                  color: color
-                                      .AppColor.homePageContainerTextSmall),
-                            ),
-                          ],
-                        ),
-                        Expanded(child: Container()),
-                        Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(60),
-                              boxShadow: [
-                                BoxShadow(
-                                    color: color.AppColor.gradientFirst,
-                                    blurRadius: 10,
-                                    offset: Offset(
-                                      4,
-                                      8,
-                                    ))
-                              ]),
-                          child: const Icon(
-                            Icons.play_circle,
-                            color: Colors.white,
-                            size: 60,
-                          ),
-                        ),
-                      ],
-                    )
+                  children: const [
+                    TheCircle(
+                        mainText: '17',
+                        the2ndText: 'workouts',
+                        lastText: 'completed'),
+                    TheCircle(
+                        mainText: '245',
+                        the2ndText: 'training',
+                        lastText: 'hours'),
+                    TheCircle(
+                        mainText: '7',
+                        the2ndText: 'accepted',
+                        lastText: 'workouts'),
                   ],
                 ),
-              ),
-            ),
-            const SizedBox(
-              height: 5,
-            ),
-            Container(
-              height: 180,
-              width: MediaQuery.of(context).size.width,
-              child: Stack(
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(top: 30),
-                    width: MediaQuery.of(context).size.width,
-                    height: 120,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        image: const DecorationImage(
-                            image: AssetImage(""
-                                "assets/card.png"),
-                            fit: BoxFit.fill),
-                        boxShadow: [
-                          BoxShadow(
-                              blurRadius: 40,
-                              offset: const Offset(8, 10),
-                              color: color.AppColor.gradientSecond
-                                  .withOpacity(0.3)),
-                          BoxShadow(
-                              blurRadius: 40,
-                              offset: const Offset(-1, -5),
-                              color: color.AppColor.gradientSecond
-                                  .withOpacity(0.3))
-                        ]),
+                const SizedBox(height: 10),
+                const TheCard(
+                    workout: "Waist Workout",
+                    percentage: 76,
+                    buttonName: "Continue",
+                    caloriesValue: 7),
+                const SizedBox(
+                  height: 10,
+                ),
+                const Text(
+                  'Today Activity',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
                   ),
-                  Container(
-                    height: 200,
-                    width: MediaQuery.of(context).size.width,
-                    margin: const EdgeInsets.only(right: 200, bottom: 30),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      image: const DecorationImage(
-                        image: AssetImage(""
-                            "assets/run.png"),
-                        // fit: BoxFit.fill
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                const Text(
+                  '2 hours workout  *  387 kcal  *  2.6km',
+                  style: TextStyle(
+                    fontSize: 15,
+                  ),
+                ),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'New Workouts',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {},
+                      child: const Text('See All'),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                Stack(children: [
+                  Positioned(
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        color: Colors.yellow,
                       ),
                     ),
                   ),
-                  //SizedBox(width: 15,),
-                  Container(
-                    width: double.maxFinite,
-                    height: 100,
-                    margin: const EdgeInsets.only(
-                      left: 150,
-                      top: 50,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'You are doing Great',
-                          style: TextStyle(
-                              color: color.AppColor.homePageDetail,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Image.asset("assets/work.jpg"),
+                  ),
+                  const Positioned(
+                      bottom: 10,
+                      left: 20,
+                      child: Text(
+                        'Get ready for arms day',
+                        style: TextStyle(
+                          color: Colors.red,
+                          fontWeight: FontWeight.bold,
                         ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        RichText(
-                            text: TextSpan(
-                                text: 'Keep it up\n',
-                                style: TextStyle(
-                                    color: color.AppColor.homePagePlanColor,
-                                    fontSize: 16),
-                                children: const [
-                              TextSpan(text: "stick to your plan")
-                            ]))
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            ),
-            Row(
-              children: [
-                Text(
-                  'Area of Focus',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.w500,
-                      color: color.AppColor.homePageTitle),
-                )
+                      ))
+                ])
               ],
             ),
-            Expanded(
-                child: OverflowBox(
-                  maxWidth:  MediaQuery.of(context).size.width,
-                  child: MediaQuery.removePadding(
-                    removeTop: true,
-                    context: context,
-                    child: ListView.builder(
-                        itemCount: 4.toDouble()~/2,
-                        itemBuilder: (_, i) {
-                          // int a = 2 * i;
-                          // int b = 2 * i + 1;
-                          return Row(
-                          children: [
-                              Container(
-                                margin: const EdgeInsets.only(left: 30, bottom: 15, top: 15),
-                                height: 170,
-                                width: (MediaQuery.of(context).size.width-90)/2,
-                                padding: const EdgeInsets.only(
-                                  bottom: 5
-                                ),
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(15),
-                                    image: const DecorationImage(
-                                        image: AssetImage('assets/runner.png')),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          blurRadius: 3,
-                                          offset: Offset(5, 5),
-                                          color: color.AppColor.gradientSecond
-                                              .withOpacity(0.1)),
-
-                                      BoxShadow(
-                                          blurRadius: 3,
-                                          offset: Offset(-5, -5),
-                                          color: color.AppColor.gradientSecond
-                                              .withOpacity(0.1)),
-
-
-                                    ]),
-                                child: Center(
-                                  child: Align(
-                                    alignment: Alignment.bottomCenter,
-                                    child: Text('Glutes',
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      color: color.AppColor.homePageDetail
-                                    ),),
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                height: 170,
-                          margin: const EdgeInsets.only(left: 30, bottom: 15, top: 15),
-                                width: (MediaQuery.of(context).size.width-90)/2,
-                                padding: const EdgeInsets.only(
-                                    bottom: 5
-                                ),
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(15),
-                                    image: const DecorationImage(
-                                        image: AssetImage('assets/runner.png')),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          blurRadius: 3,
-                                          offset: Offset(5, 5),
-                                          color: color.AppColor.gradientSecond
-                                              .withOpacity(0.1)),
-
-                                      BoxShadow(
-                                          blurRadius: 3,
-                                          offset: Offset(-5, -5),
-                                          color: color.AppColor.gradientSecond
-                                              .withOpacity(0.1)),
-
-
-                                    ]),
-                                child: Center(
-                                  child: Align(
-                                    alignment: Alignment.bottomCenter,
-                                    child: Text('Glutes',
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          color: color.AppColor.homePageDetail
-                                      ),),
-                                  ),
-                                ),
-                              )
-                            ],
-                          );
-                        }),
-                  ),
-                ))
-          ],
+          ),
         ),
       ),
     );
