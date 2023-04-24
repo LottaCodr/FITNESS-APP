@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:the_trainer/widgets/navbar.dart';
-import 'package:the_trainer/workout_info.dart';
+import 'package:the_trainer/screens/workout_info.dart';
 
-import 'home_page.dart';
+import 'screens/home_page.dart';
 
 void main() {
   runApp(const MyApp());

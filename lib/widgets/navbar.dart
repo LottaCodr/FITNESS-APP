@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:the_trainer/home_page.dart';
-import 'package:the_trainer/workout_info.dart';
+import 'package:the_trainer/screens/home_page.dart';
+import 'package:the_trainer/screens/workout_info.dart';
 
 class MyBottomNavBar extends StatefulWidget {
 

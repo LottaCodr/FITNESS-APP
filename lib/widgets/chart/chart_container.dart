@@ -1,13 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ChartContainer extends StatelessWidget {
   final Color color;
-  final String title;
   final Widget chart;
 
   const ChartContainer(
-      {Key? key, required this.title, required this.color, required this.chart})
+      {Key? key,  required this.color, required this.chart})
       : super(key: key);
 
   @override
@@ -18,20 +16,13 @@ class ChartContainer extends StatelessWidget {
         height: MediaQuery.of(context).size.width * 0.95 * 0.65,
         padding: const EdgeInsets.fromLTRB(0, 10, 20, 10),
         decoration: BoxDecoration(
-          color: Colors.transparent,
+          color: Colors.blueGrey.shade600,
           borderRadius: BorderRadius.circular(20),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              title,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-                fontWeight: FontWeight.bold
-              ),
-            ),
+
             Expanded(child: Container(
               padding: const EdgeInsets.only(
                 top: 10
