@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:the_trainer/screens/challenges.dart';
 import 'package:the_trainer/widgets/chart/chart_container.dart';
 import 'package:the_trainer/widgets/chart/the_barchart.dart';
+import 'package:the_trainer/widgets/tagged_clip_container.dart';
 import 'package:the_trainer/widgets/the_card.dart';
 import 'package:the_trainer/widgets/the_circle.dart';
 import 'package:the_trainer/widgets/the_text_row.dart';
@@ -112,10 +114,20 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(
                   height: 10,
                 ),
-                TheClipContainer(
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const TheChallenges()));
+                  },
+                  child: TaggedClippedContainer(
                     myImage: Image.asset('assets/maraton.jpg'),
                     title: 'Get ready to Maraton',
-                    subTitle: '231 Members - Medium level')
+                    subTitle: '231 Members - Medium level',
+                    tagText: '30 hrs left',
+                  ),
+                )
               ],
             ),
           ),

@@ -24,7 +24,7 @@ class _WorkoutInfoState extends State<WorkoutInfo> {
               Container(
                 padding: const EdgeInsets.all(12),
                 child: const Text(
-                  'Workout Progress',
+                  'Progress',
                   style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                 ),
               ),

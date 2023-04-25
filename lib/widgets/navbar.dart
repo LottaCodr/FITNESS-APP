@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:the_trainer/screens/home_page.dart';
 import 'package:the_trainer/screens/workout_info.dart';
 
+import '../screens/ProgressScreen.dart';
+
 class MyBottomNavBar extends StatefulWidget {
 
 
@@ -19,11 +21,7 @@ class _MyBottomNavBarState extends State<MyBottomNavBar> {
   final _screens = [
     const HomePage(),
     const WorkoutInfo(),
-    const Scaffold(
-      body: Center(
-        child: Text('progress'),
-      ),
-    ),
+    const ProgressScreen(),
     const Scaffold(
       body: Center(
         child: Text('You'),
@@ -57,13 +55,13 @@ class _MyBottomNavBarState extends State<MyBottomNavBar> {
                 activeIcon: Icon(Icons.home),
                 label: 'Home'),
             BottomNavigationBarItem(
+                icon: Icon(Icons.insert_chart),
+                activeIcon: Icon(Icons.insert_chart_outlined),
+                label: 'Progress'),
+            BottomNavigationBarItem(
                 icon: Icon(Icons.fitness_center_outlined),
                 activeIcon: Icon(Icons.fitness_center),
-                label: 'Workout'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.history_outlined),
-                activeIcon: Icon(Icons.history),
-                label: 'history'),
+                label: 'Progress'),
             BottomNavigationBarItem(
                 icon: Icon(Icons.person_2_outlined),
                 activeIcon: Icon(Icons.person),

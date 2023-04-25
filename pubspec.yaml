@@ -39,6 +39,7 @@ dependencies:
   table_calendar: ^3.0.9
   flutter_chart: ^0.1.6
   fl_chart: ^0.62.0
+  flutter_launcher_icons: ^0.13.1
 
 dev_dependencies:
   flutter_test:
