@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:the_trainer/screens/challenges.dart';
+import 'package:the_trainer/screens/profile_page.dart';
 import 'package:the_trainer/widgets/chart/chart_container.dart';
 import 'package:the_trainer/widgets/chart/the_barchart.dart';
 import 'package:the_trainer/widgets/tagged_clip_container.dart';
@@ -31,17 +32,29 @@ class _HomePageState extends State<HomePage> {
                 SizedBox(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      Text(
+                    children: [
+                      const Text(
                         'DashBoard',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 30,
                         ),
                       ),
-                      CircleAvatar(
-                        backgroundColor: Colors.white,
-                        radius: 35,
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute(
+                              builder: (context) => Scaffold(
+                                appBar: AppBar(
+                                  elevation: 0,
+                                  backgroundColor: Colors.transparent,
+                                ),
+                                body: TheProfile(),
+                              )));
+                        },
+                        child: const CircleAvatar(
+                          backgroundColor: Colors.white,
+                          radius: 35,
+                        ),
                       ),
                     ],
                   ),

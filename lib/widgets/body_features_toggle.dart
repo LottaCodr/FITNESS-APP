@@ -29,18 +29,24 @@ class _BodyFeaturesToggleState extends State<BodyFeaturesToggle> {
         print(_selectedIndex);
       },
       child: Container(
-        padding: const EdgeInsets.all(12),
+        padding: EdgeInsets.all(5),
         height: 50,
-        width: 50,
+        width: 60,
         decoration: BoxDecoration(
-            color: _selectedIndex == index ? Colors.red : Colors.blueGrey[800],
+            color:
+                _selectedIndex == index ? Colors.red : Colors.blueGrey[800],
             borderRadius: BorderRadius.circular(20)),
         child: Center(
-          child: Text(
-            _bodyFeatures[index],
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-                color: _selectedIndex == index ? Colors.white : Colors.grey[600]),
+          child: FittedBox(
+            fit: BoxFit.fill,
+            child: Text(
+              _bodyFeatures[index],
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: _selectedIndex == index
+                      ? Colors.white
+                      : Colors.grey[600]),
+            ),
           ),
         ),
       ),

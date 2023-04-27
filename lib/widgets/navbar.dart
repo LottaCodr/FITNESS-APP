@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:the_trainer/screens/home_page.dart';
-import 'package:the_trainer/screens/workout_info.dart';
+import 'package:the_trainer/screens/profile_page.dart';
+import 'package:the_trainer/screens/ProgressScreen.dart';
 
-import '../screens/ProgressScreen.dart';
+import '../screens/WorkoutScreen.dart';
 
 class MyBottomNavBar extends StatefulWidget {
-
-
-  const MyBottomNavBar(
-      {Key? key})
-      : super(key: key);
+  const MyBottomNavBar({Key? key}) : super(key: key);
 
   @override
   State<MyBottomNavBar> createState() => _MyBottomNavBarState();
@@ -20,13 +17,9 @@ class _MyBottomNavBarState extends State<MyBottomNavBar> {
 
   final _screens = [
     const HomePage(),
-    const WorkoutInfo(),
     const ProgressScreen(),
-    const Scaffold(
-      body: Center(
-        child: Text('You'),
-      ),
-    )
+    const WorkoutInfo(),
+    const TheProfile(),
   ];
 
   @override
@@ -57,7 +50,7 @@ class _MyBottomNavBarState extends State<MyBottomNavBar> {
             BottomNavigationBarItem(
                 icon: Icon(Icons.insert_chart),
                 activeIcon: Icon(Icons.insert_chart_outlined),
-                label: 'Progress'),
+                label: 'Workouts'),
             BottomNavigationBarItem(
                 icon: Icon(Icons.fitness_center_outlined),
                 activeIcon: Icon(Icons.fitness_center),

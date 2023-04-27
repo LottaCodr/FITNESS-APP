@@ -43,21 +43,21 @@ class TheClipContainer extends StatelessWidget {
               Text(
                 subTitle,
                 style: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.normal,
-                    fontSize: 16,
-                    shadows: [
-                      Shadow(
-                        offset: Offset(0, 0),
-                        blurRadius: 10,
-                        color: Colors.black,
-                      )
-                    ]),
+                  color: Colors.white,
+                  fontWeight: FontWeight.normal,
+                  fontSize: 16,
+                  shadows: [
+                    Shadow(
+                      offset: Offset(0, 0),
+                      blurRadius: 10,
+                      color: Colors.black,
+                    )
+                  ],
+                ),
               ),
             ],
           ),
         ),
-
       ],
     );
   }

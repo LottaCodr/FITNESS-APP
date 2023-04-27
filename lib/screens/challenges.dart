@@ -15,6 +15,7 @@ class _TheChallengesState extends State<TheChallenges> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Challenges'),
+        backgroundColor: Colors.transparent,
         centerTitle: false,
         elevation: 0,
       ),

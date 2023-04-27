@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:the_trainer/widgets/navbar.dart';
-import 'package:the_trainer/screens/workout_info.dart';
+import 'package:the_trainer/screens/ProgressScreen.dart';
 
 import 'screens/home_page.dart';
 
