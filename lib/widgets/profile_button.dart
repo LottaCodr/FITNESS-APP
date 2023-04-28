@@ -31,7 +31,7 @@ class ProfileButton extends StatelessWidget {
                   icon
                 ),
                 title: Text(title),
-                trailing: Icon(Icons.arrow_forward_ios),
+                trailing: const Icon(Icons.arrow_forward_ios),
               )),
         ),
        const SizedBox(

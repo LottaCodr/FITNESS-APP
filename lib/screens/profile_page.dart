@@ -73,17 +73,20 @@ class _TheProfileState extends State<TheProfile> {
                           Text(
                             'Start',
                             style: TextStyle(
-                                fontWeight: FontWeight.bold, color: Colors.grey),
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey),
                           ),
                           Text(
                             'Current',
                             style: TextStyle(
-                                fontWeight: FontWeight.bold, color: Colors.grey),
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey),
                           ),
                           Text(
                             'Target',
                             style: TextStyle(
-                                fontWeight: FontWeight.bold, color: Colors.grey),
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey),
                           )
                         ],
                       ),
@@ -127,13 +130,30 @@ class _TheProfileState extends State<TheProfile> {
                   decoration:
                       BoxDecoration(borderRadius: BorderRadius.circular(40)),
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) => SimpleDialog(
+                          title: const Text(
+                              'Sorry! This Feature is unavailable at the moment.'),
+                          contentPadding: const  EdgeInsets.all(12),
+                          children: [
+                            TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Text('close'))
+                          ],
+                        ),
+                      );
+                    },
                     style: ButtonStyle(
                         shape: MaterialStatePropertyAll(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(50)))),
                     child: const Text(
                       'Log weight',
-                      style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),

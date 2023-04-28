@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:the_trainer/widgets/navbar.dart';
-import 'package:the_trainer/screens/ProgressScreen.dart';
 
-import 'screens/home_page.dart';
 
 void main() {
   runApp(const MyApp());
