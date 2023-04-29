@@ -9,19 +9,16 @@ class BarChartContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BarChart(BarChartData(
-      maxY: 20,
-      barGroups: barChartGroupData,
-      titlesData: FlTitlesData(
-        bottomTitles: AxisTitles(
-          sideTitles: SideTitles(
-            showTitles: true,
-            
-          )
-
-        )
-      )
-    ));
+        borderData: FlBorderData(show: false),
+        gridData: FlGridData(show: false),
+        maxY: 20,
+        barGroups: barChartGroupData,
+        titlesData: FlTitlesData(
+            topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+            rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+            bottomTitles: AxisTitles(
+                sideTitles: SideTitles(
+              showTitles: true,
+            )))));
   }
 }
-
-

@@ -15,6 +15,13 @@ class _ProgressScreenState extends State<ProgressScreen> {
   TextEditingController search = TextEditingController();
   int changeIcon = 0;
 
+  @override
+  void dispose() {
+    search.dispose();
+    super.dispose();
+
+  }
+
   void _buildIcon(int index) {
     setState(() {
       changeIcon = index;
@@ -55,6 +62,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
                                 showSearch(context: context, delegate: CustomSearchDelegate());
                               },
                               textAlign: TextAlign.start,
+                              controller: search,
                               keyboardType: TextInputType.text,
                               decoration: const InputDecoration(
                                 border: InputBorder.none,

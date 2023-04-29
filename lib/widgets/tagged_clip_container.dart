@@ -84,6 +84,6 @@ class TaggedClippedContainer extends StatelessWidget {
         )
       ],
     );
-    ;
+
   }
 }
