@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:the_trainer/User%20_Auth/Sign_up.dart';
 import 'package:the_trainer/widgets/navbar.dart';
 
 
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
           selectedItemColor: Colors.red
         )
       ),
-      home:  const MyBottomNavBar(),
+      home:  const SignUpPage(),
     );
   }
 }

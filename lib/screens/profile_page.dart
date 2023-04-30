@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:the_trainer/User%20_Auth/Sign_up.dart';
 import 'package:the_trainer/widgets/profile_button.dart';
 import 'package:the_trainer/widgets/progressbar.dart';
 
@@ -128,23 +129,24 @@ class _TheProfileState extends State<TheProfile> {
                 Container(
                   width: 400,
                   decoration:
-                      BoxDecoration(borderRadius: BorderRadius.circular(40)),
+                  BoxDecoration(borderRadius: BorderRadius.circular(40)),
                   child: ElevatedButton(
                     onPressed: () {
                       showDialog(
                         context: context,
-                        builder: (context) => SimpleDialog(
-                          title: const Text(
-                              'Sorry! This Feature is unavailable at the moment.'),
-                          contentPadding: const  EdgeInsets.all(12),
-                          children: [
-                            TextButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                                child: const Text('close'))
-                          ],
-                        ),
+                        builder: (context) =>
+                            SimpleDialog(
+                              title: const Text(
+                                  'Sorry! This Feature is unavailable at the moment.'),
+                              contentPadding: const EdgeInsets.all(12),
+                              children: [
+                                TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: const Text('close'))
+                              ],
+                            ),
                       );
                     },
                     style: ButtonStyle(
@@ -153,21 +155,36 @@ class _TheProfileState extends State<TheProfile> {
                     child: const Text(
                       'Log weight',
                       style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                      TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
                 const SizedBox(
                   height: 20,
                 ),
-                const ProfileButton(
+                ProfileButton(
                   title: 'Edit Profile',
                   icon: Icons.person_outline_sharp,
+                  myNavigator: () {},
                 ),
-                const ProfileButton(
-                    title: 'Downloaded Workouts', icon: Icons.save_alt),
-                const ProfileButton(title: 'Saved Workouts', icon: Icons.save),
-                const ProfileButton(title: 'Log Out', icon: Icons.output_sharp)
+                ProfileButton(
+                  title: 'Downloaded Workouts',
+                  icon: Icons.save_alt,
+                  myNavigator: () {},
+                ),
+                ProfileButton(
+                  title: 'Saved Workouts',
+                  icon: Icons.save,
+                  myNavigator: () {},
+                ),
+                ProfileButton(
+                  title: 'Log Out',
+                  icon: Icons.output_sharp,
+                  myNavigator: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => const SignUpPage()));
+                  },
+                )
               ],
             ),
           ),
