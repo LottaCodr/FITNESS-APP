@@ -1,10 +1,18 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:the_trainer/User%20_Auth/Sign_in.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:the_trainer/User%20_Auth/Sign_up.dart';
+import 'package:the_trainer/firebase_options.dart';
 import 'package:the_trainer/widgets/navbar.dart';
 
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
-void main() {
   runApp(const MyApp());
 }
 
@@ -15,16 +23,23 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner : false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.red,
-        brightness: Brightness.dark,
-        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-          selectedItemColor: Colors.red
-        )
+          primarySwatch: Colors.red,
+          brightness: Brightness.dark,
+          bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+              selectedItemColor: Colors.red)),
+      home: StreamBuilder(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (BuildContext context, snapshot) {
+          if (snapshot.hasData) {
+            return const MyBottomNavBar();
+          } else {
+            return const SignIn();
+          }
+        },
       ),
-      home:  const SignUpPage(),
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:the_trainer/User%20_Auth/Sign_up.dart';
 import 'package:the_trainer/widgets/profile_button.dart';
@@ -11,6 +12,9 @@ class TheProfile extends StatefulWidget {
 }
 
 class _TheProfileState extends State<TheProfile> {
+   signOut()  {
+     FirebaseAuth.instance.signOut();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -181,9 +185,8 @@ class _TheProfileState extends State<TheProfile> {
                   title: 'Log Out',
                   icon: Icons.output_sharp,
                   myNavigator: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => const SignUpPage()));
-                  },
+                    signOut();
+                  }
                 )
               ],
             ),

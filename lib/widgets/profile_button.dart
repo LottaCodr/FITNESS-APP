@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class ProfileButton extends StatelessWidget {
   final String title;
   final IconData icon;
-  final Function myNavigator;
+  final VoidCallback myNavigator;
 
   const ProfileButton({Key? key,
     required this.title,
@@ -19,9 +19,7 @@ class ProfileButton extends StatelessWidget {
           height: 50,
           decoration: BoxDecoration(borderRadius: BorderRadius.circular(40)),
           child: ElevatedButton(
-              onPressed: () {
-                myNavigator;
-              },
+              onPressed: myNavigator,
               style: ButtonStyle(
                   backgroundColor:
                       MaterialStatePropertyAll(Colors.white.withOpacity(0.1)),

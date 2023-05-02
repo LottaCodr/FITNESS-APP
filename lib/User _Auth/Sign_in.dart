@@ -1,7 +1,6 @@
 import 'dart:ui';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import '../widgets/MyTextField.dart';
 import '../widgets/big_button.dart';
 import 'Sign_up.dart';
@@ -18,14 +17,34 @@ class _SignInState extends State<SignIn> {
   TextEditingController passwordController = TextEditingController();
 
   @override
+  void dispose() {
+    super.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+  }
+
+  //signIn firebase authentication
+   signIn() async {
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text,
+      );
+    } catch (e) {
+      print('Error logging in: $e');
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent,
       body: SafeArea(
         child: Expanded(
           child: Stack(
             children: [
               Container(
-                padding: const EdgeInsets.all(12),
+                padding: const EdgeInsets.fromLTRB(12, 50, 12, 12),
                 decoration: const BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage('assets/work.jpg'),
@@ -40,13 +59,6 @@ class _SignInState extends State<SignIn> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.arrow_back,
-                              size: 35,
-                            ),
-                          ),
                           const Center(
                             child: Text(
                               'WELCOME',
@@ -57,13 +69,14 @@ class _SignInState extends State<SignIn> {
                               ),
                             ),
                           ),
-                          const SizedBox(height: 5,),
+                          const SizedBox(
+                            height: 5,
+                          ),
                           const Center(
                             child: Text(
                               'Sign in to continue',
                               style: TextStyle(
                                 fontSize: 17,
-
                               ),
                             ),
                           ),
@@ -87,15 +100,37 @@ class _SignInState extends State<SignIn> {
                               myTextController: passwordController,
                               hint: '*************',
                               obscureText: true),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              TextButton(
+                                onPressed: signIn,
+                                child: const Text(
+                                  'Forgot Password?',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    shadows: [
+                                      Shadow(
+                                        color: Colors.black,
+                                        blurRadius: 1,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                           const SizedBox(
-                            height: 80,
+                            height: 40,
                           ),
                           BigButton(
-                            myNavigation: () {},
+                            myNavigation: (){
+                              signIn();
+                            },
                             myText: 'Sign In',
                           ),
                           const SizedBox(
-                            height: 10,
+                            height: 25,
                           ),
                           const Center(
                             child: Text(
@@ -128,7 +163,7 @@ class _SignInState extends State<SignIn> {
                                 icon: const Icon(
                                   Icons.facebook,
                                   color: Colors.blue,
-                                  size: 45,
+                                  size: 35,
                                 ),
                                 onPressed: () {},
                               ),
@@ -138,16 +173,16 @@ class _SignInState extends State<SignIn> {
                               const Text(
                                 '|',
                                 style: TextStyle(
-                                    color: Colors.black, fontSize: 50),
+                                    color: Colors.black, fontSize: 40),
                               ),
                               IconButton(
                                 icon: const Icon(
                                   Icons.gpp_maybe,
                                   color: Colors.green,
-                                  size: 43,
+                                  size: 33,
                                 ),
                                 onPressed: () {},
-                              )
+                              ),
                             ],
                           ),
                           Row(
@@ -162,17 +197,24 @@ class _SignInState extends State<SignIn> {
                               TextButton(
                                 onPressed: () {
                                   Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => SignUpPage()));
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const SignUpPage(),
+                                    ),
+                                  );
                                 },
                                 child: const Text(
                                   'Sign Up',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
-                              )
+                              ),
                             ],
                           ),
-                          const SizedBox(height: 60,)
+                          const SizedBox(
+                            height: 60,
+                          ),
                         ],
                       ),
                     ),

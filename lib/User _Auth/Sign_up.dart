@@ -1,10 +1,10 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 import 'package:the_trainer/User%20_Auth/Sign_in.dart';
 import 'package:the_trainer/widgets/MyTextField.dart';
-import 'package:the_trainer/widgets/navbar.dart';
-
 import '../widgets/big_button.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -20,9 +20,76 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController phoneController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
+  //form validation
+  validateForm() {
+    String name = nameController.text.trim();
+    String email = emailController.text.trim();
+    String password = passwordController.text.trim();
+    String phoneNumber = phoneController.text.trim();
+
+    if (name.isEmpty ||
+        email.isEmpty ||
+        password.isEmpty ||
+        phoneNumber.isEmpty) {
+      Fluttertoast.showToast(
+        msg: 'Please fill in the fields',
+        gravity: ToastGravity.BOTTOM,
+        toastLength: Toast.LENGTH_SHORT,
+      );
+    } else if (name.length < 3) {
+      Fluttertoast.showToast(
+        msg: 'Name must be at least 3 characters.',
+        gravity: ToastGravity.BOTTOM,
+        toastLength: Toast.LENGTH_SHORT,
+      );
+    } else if (phoneNumber.length < 11 || phoneNumber.length > 11) {
+      Fluttertoast.showToast(
+        msg: 'Invalid Phone number',
+        gravity: ToastGravity.BOTTOM,
+        toastLength: Toast.LENGTH_SHORT
+      );
+    } else if (!isValidEmail(email)) {
+      Fluttertoast.showToast(
+        msg: 'Invalid Email',
+        gravity: ToastGravity.BOTTOM,
+        toastLength: Toast.LENGTH_SHORT,
+      );
+    } else if (phoneNumber.length < 6) {
+      Fluttertoast.showToast(
+        msg: 'Must contain atleast 6 characters',
+        gravity: ToastGravity.BOTTOM,
+        toastLength: Toast.LENGTH_SHORT,
+      );
+    } else {
+      Fluttertoast.showToast(
+        msg: 'Your Account has been successfully created',
+        gravity: ToastGravity.SNACKBAR,
+        toastLength: Toast.LENGTH_LONG,
+      );
+    }
+  }
+
+  //lets create a custom email validator
+  bool isValidEmail(String email) {
+    RegExp emailRegExp = RegExp(
+        r'^[\w-]+(\.[\w-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,})$');
+    return emailRegExp.hasMatch(email);
+  }
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    phoneController.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent,
       body: SafeArea(
         child: Expanded(
           child: Stack(children: [
@@ -43,7 +110,12 @@ class _SignUpPageState extends State<SignUpPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const SignIn()));
+                          },
                           icon: const Icon(
                             Icons.arrow_back,
                             size: 35,
@@ -53,10 +125,9 @@ class _SignUpPageState extends State<SignUpPage> {
                           child: Text(
                             'Create Account',
                             style: TextStyle(
-                              fontSize: 30,
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 2
-                            ),
+                                fontSize: 30,
+                                fontWeight: FontWeight.bold,
+                                letterSpacing: 2),
                           ),
                         ),
                         const SizedBox(
@@ -76,7 +147,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             icon: Icons.email_outlined,
                             label: 'Email',
                             myTextType: TextInputType.emailAddress,
-                            myTextController: nameController,
+                            myTextController: emailController,
                             hint: 'Lotannajason@example.com',
                             obscureText: false),
                         const SizedBox(
@@ -86,24 +157,28 @@ class _SignUpPageState extends State<SignUpPage> {
                             icon: Icons.phone,
                             label: 'Phone Number',
                             myTextType: TextInputType.phone,
-                            myTextController: emailController,
+                            myTextController: phoneController,
                             hint: '+234-000-000-000',
                             obscureText: false),
                         const SizedBox(
                           height: 10,
                         ),
                         MyTextField(
-                            icon: Icons.lock,
+                            icon: passwordController == passwordController
+                                ? Icons.lock
+                                : Icons.lock_outline,
                             label: 'Password',
                             myTextType: TextInputType.text,
                             myTextController: passwordController,
                             hint: '*************',
                             obscureText: true),
                         const SizedBox(
-                          height: 10,
+                          height: 15,
                         ),
                         BigButton(
-                          myNavigation: () {},
+                          myNavigation: () {
+                            validateForm();
+                          },
                           myText: 'Sign Up',
                         ),
                         const SizedBox(
@@ -140,23 +215,23 @@ class _SignUpPageState extends State<SignUpPage> {
                               icon: const Icon(
                                 Icons.facebook,
                                 color: Colors.blue,
-                                size: 45,
+                                size: 35,
                               ),
                               onPressed: () {},
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 10,
                             ),
                             const Text(
                               '|',
                               style:
-                                  TextStyle(color: Colors.black, fontSize: 50),
+                                  TextStyle(color: Colors.black, fontSize: 40),
                             ),
                             IconButton(
                               icon: const Icon(
                                 Icons.gpp_maybe,
                                 color: Colors.green,
-                                size: 43,
+                                size: 33,
                               ),
                               onPressed: () {},
                             )
@@ -176,13 +251,13 @@ class _SignUpPageState extends State<SignUpPage> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) =>
-                                            SignIn()));
+                                        builder: (context) => const SignIn()));
                               },
                               child: const Text(
                                 'Sign in',
+                                style: TextStyle(fontWeight: FontWeight.bold),
                               ),
-                            )
+                            ),
                           ],
                         )
                       ],
