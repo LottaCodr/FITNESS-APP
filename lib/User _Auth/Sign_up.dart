@@ -1,11 +1,13 @@
 import 'dart:ui';
-
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:get/get.dart';
 import 'package:the_trainer/User%20_Auth/Sign_in.dart';
+import 'package:the_trainer/main.dart';
 import 'package:the_trainer/widgets/MyTextField.dart';
 import '../widgets/big_button.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -19,6 +21,55 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
+  //create user
+  Future signUP() async {
+    showDialog(
+      context: context,
+      builder: (context) => const Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
+    try {
+      UserCredential userCredential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+      );
+
+      //Get user id
+      String userID = userCredential.user!.uid;
+
+      //collect user's name and phoneNumber
+      String name = nameController.text.trim();
+      String phoneNumber = phoneController.text.trim();
+
+      //Create a reference to the users collection in firestore
+      CollectionReference userRef =
+          FirebaseFirestore.instance.collection("users");
+
+      //Create a new document in the users collection with the userID
+      await userRef.doc(userID).set({
+        'name': name,
+        'phoneNumber': phoneNumber,
+      });
+
+      //successful user creation
+      registerValidUser();
+    } on FirebaseAuthException catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+//display error message to user
+      Fluttertoast.showToast(
+          msg: 'Failed to create account: ${e.message}',
+          gravity: ToastGravity.BOTTOM,
+          toastLength: Toast.LENGTH_SHORT);
+    } finally {
+      Navigator.pop(context);
+    }
+    navigatorKey.currentState!.popUntil((route) => route.isFirst);
+  }
 
   //form validation
   validateForm() {
@@ -44,10 +95,9 @@ class _SignUpPageState extends State<SignUpPage> {
       );
     } else if (phoneNumber.length < 11 || phoneNumber.length > 11) {
       Fluttertoast.showToast(
-        msg: 'Invalid Phone number',
-        gravity: ToastGravity.BOTTOM,
-        toastLength: Toast.LENGTH_SHORT
-      );
+          msg: 'Invalid Phone number',
+          gravity: ToastGravity.BOTTOM,
+          toastLength: Toast.LENGTH_SHORT);
     } else if (!isValidEmail(email)) {
       Fluttertoast.showToast(
         msg: 'Invalid Email',
@@ -63,7 +113,7 @@ class _SignUpPageState extends State<SignUpPage> {
     } else {
       Fluttertoast.showToast(
         msg: 'Your Account has been successfully created',
-        gravity: ToastGravity.SNACKBAR,
+        gravity: ToastGravity.BOTTOM,
         toastLength: Toast.LENGTH_LONG,
       );
     }
@@ -74,6 +124,19 @@ class _SignUpPageState extends State<SignUpPage> {
     RegExp emailRegExp = RegExp(
         r'^[\w-]+(\.[\w-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,})$');
     return emailRegExp.hasMatch(email);
+  }
+
+  //register the user
+  void registerValidUser() {
+    if (validateForm()) {
+      signUP();
+    }
+  }
+
+  //redirect the user
+  void redirectToSignInPage() {
+    Navigator.pushAndRemoveUntil(context,
+        MaterialPageRoute(builder: (e) => const SignIn()), (route) => false);
   }
 
   @override
@@ -177,7 +240,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                         BigButton(
                           myNavigation: () {
-                            validateForm();
+                            signUP();
                           },
                           myText: 'Sign Up',
                         ),

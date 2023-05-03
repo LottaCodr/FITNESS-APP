@@ -1,6 +1,8 @@
 import 'dart:ui';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import '../main.dart';
 import '../widgets/MyTextField.dart';
 import '../widgets/big_button.dart';
 import 'Sign_up.dart';
@@ -24,7 +26,14 @@ class _SignInState extends State<SignIn> {
   }
 
   //signIn firebase authentication
-   signIn() async {
+  signIn() async {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => const Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: emailController.text.trim(),
@@ -33,6 +42,7 @@ class _SignInState extends State<SignIn> {
     } catch (e) {
       print('Error logging in: $e');
     }
+    navigatorKey.currentState!.popUntil((route) => route.isFirst);
   }
 
   @override
@@ -124,7 +134,7 @@ class _SignInState extends State<SignIn> {
                             height: 40,
                           ),
                           BigButton(
-                            myNavigation: (){
+                            myNavigation: () {
                               signIn();
                             },
                             myText: 'Sign In',
