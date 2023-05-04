@@ -26,8 +26,8 @@ class ProfileButton extends StatelessWidget {
                   shape: MaterialStatePropertyAll(RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(50)))),
               child:  ListTile(
-                iconColor: Colors.black,
-                textColor: Colors.black,
+                iconColor: Colors.white,
+                textColor: Colors.white,
                 leading: Icon(
                   icon
                 ),

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import '../widgets/navbar.dart';
 
 class MySplashScreen extends StatefulWidget {
   const MySplashScreen({Key? key}) : super(key: key);
@@ -10,23 +11,33 @@ class MySplashScreen extends StatefulWidget {
 }
 
 class _MySplashScreenState extends State<MySplashScreen> {
-  // StartTime(){
-  //   Timer(const Duration(seconds: 3), () async {
-  //     if (await fAuth.currentUser =! null) {
-  //     currentFireBaseUser = fAuth.current;
-  //     Navigator.push(context, MaterialPageRoute(builder: (e) => const SignIn()));
-  //     }
-  //   });
-  // }
+  void startTimer() {
+    Timer(const Duration(seconds: 4), () {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (e) => const MyBottomNavBar()));
+    });
+  }
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
+    startTimer();
   }
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              'assets/runner.png',
+              scale: 70,
+            )
+          ],
+        ),
+      ),
+    );
   }
 }

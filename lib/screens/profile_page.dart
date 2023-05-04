@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:the_trainer/User%20_Auth/Sign_up.dart';
+import 'package:the_trainer/User%20_Auth/Sign_in.dart';
 import 'package:the_trainer/widgets/profile_button.dart';
 import 'package:the_trainer/widgets/progressbar.dart';
 
@@ -12,9 +12,12 @@ class TheProfile extends StatefulWidget {
 }
 
 class _TheProfileState extends State<TheProfile> {
-   signOut()  {
-     FirebaseAuth.instance.signOut();
+  void signOut() async {
+    await FirebaseAuth.instance.signOut();
+    Navigator.pushAndRemoveUntil(context,
+        MaterialPageRoute(builder: (context) => SignIn()), (route) => false);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,22 +28,28 @@ class _TheProfileState extends State<TheProfile> {
             child: Column(
               children: [
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Icon(Icons.settings),
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
                     CircleAvatar(
-                      radius: 50,
+                      radius: 80,
                     ),
-                    Icon(Icons.notifications_none)
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const [
+                        Text(
+                          'Lotanna Jason',
+                          style: TextStyle(fontSize: 26),
+                        ),
+                        Text(
+                          'your@email.com',
+                          style: TextStyle(color: Colors.grey),
+                        ),
+                      ],
+                    )
                   ],
                 ),
                 const SizedBox(
                   height: 10,
-                ),
-                const Text(
-                  'Lotanna Jason',
-                  style: TextStyle(fontSize: 30),
                 ),
                 const SizedBox(
                   height: 20,
@@ -133,24 +142,23 @@ class _TheProfileState extends State<TheProfile> {
                 Container(
                   width: 400,
                   decoration:
-                  BoxDecoration(borderRadius: BorderRadius.circular(40)),
+                      BoxDecoration(borderRadius: BorderRadius.circular(40)),
                   child: ElevatedButton(
                     onPressed: () {
                       showDialog(
                         context: context,
-                        builder: (context) =>
-                            SimpleDialog(
-                              title: const Text(
-                                  'Sorry! This Feature is unavailable at the moment.'),
-                              contentPadding: const EdgeInsets.all(12),
-                              children: [
-                                TextButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                    child: const Text('close'))
-                              ],
-                            ),
+                        builder: (context) => SimpleDialog(
+                          title: const Text(
+                              'Sorry! This Feature is unavailable at the moment.'),
+                          contentPadding: const EdgeInsets.all(12),
+                          children: [
+                            TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Text('close'))
+                          ],
+                        ),
                       );
                     },
                     style: ButtonStyle(
@@ -159,7 +167,7 @@ class _TheProfileState extends State<TheProfile> {
                     child: const Text(
                       'Log weight',
                       style:
-                      TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
@@ -172,13 +180,13 @@ class _TheProfileState extends State<TheProfile> {
                   myNavigator: () {},
                 ),
                 ProfileButton(
-                  title: 'Downloaded Workouts',
+                  title: 'Downloads',
                   icon: Icons.save_alt,
                   myNavigator: () {},
                 ),
                 ProfileButton(
-                  title: 'Saved Workouts',
-                  icon: Icons.save,
+                  title: 'Favourites',
+                  icon: Icons.favorite,
                   myNavigator: () {},
                 ),
                 ProfileButton(
@@ -186,8 +194,8 @@ class _TheProfileState extends State<TheProfile> {
                   icon: Icons.output_sharp,
                   myNavigator: () {
                     signOut();
-                  }
-                )
+                  },
+                ),
               ],
             ),
           ),

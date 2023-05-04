@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:the_trainer/widgets/navbar.dart';
 import '../main.dart';
 import '../widgets/MyTextField.dart';
 import '../widgets/big_button.dart';
@@ -37,8 +38,12 @@ class _SignInState extends State<SignIn> {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: emailController.text.trim(),
-        password: passwordController.text,
+        password: passwordController.text.trim(),
       );
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (e) => MyBottomNavBar()),
+          (route) => false);
     } catch (e) {
       print('Error logging in: $e');
     }
@@ -47,6 +52,8 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
+    bool _passwordvisibility = false;
+
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: SafeArea(
@@ -109,10 +116,21 @@ class _SignInState extends State<SignIn> {
                               myTextType: TextInputType.text,
                               myTextController: passwordController,
                               hint: '*************',
-                              obscureText: true),
+                              obscureText: !_passwordvisibility),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
+                              GestureDetector(
+                                onTap: (){
+                                  setState(() {
+                                    _passwordvisibility = !_passwordvisibility;
+                                  });
+                                },
+                                child:  Icon( _passwordvisibility? Icons.visibility :
+                                  Icons.visibility_off,
+                                  size: 30,
+                                ),
+                              ),
                               TextButton(
                                 onPressed: signIn,
                                 child: const Text(

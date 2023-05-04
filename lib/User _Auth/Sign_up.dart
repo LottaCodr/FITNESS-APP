@@ -43,6 +43,8 @@ class _SignUpPageState extends State<SignUpPage> {
       //collect user's name and phoneNumber
       String name = nameController.text.trim();
       String phoneNumber = phoneController.text.trim();
+      String email = emailController.text.trim();
+      String password = passwordController.text.trim();
 
       //Create a reference to the users collection in firestore
       CollectionReference userRef =
@@ -52,10 +54,12 @@ class _SignUpPageState extends State<SignUpPage> {
       await userRef.doc(userID).set({
         'name': name,
         'phoneNumber': phoneNumber,
+        'email': email,
+        'password': password
       });
 
       //successful user creation
-      registerValidUser();
+      redirectToSignInPage();
     } on FirebaseAuthException catch (e) {
       if (kDebugMode) {
         print(e);
@@ -68,11 +72,11 @@ class _SignUpPageState extends State<SignUpPage> {
     } finally {
       Navigator.pop(context);
     }
-    navigatorKey.currentState!.popUntil((route) => route.isFirst);
+    //navigatorKey.currentState!.popUntil((route) => route.isFirst);
   }
 
   //form validation
-  validateForm() {
+  bool validateForm() {
     String name = nameController.text.trim();
     String email = emailController.text.trim();
     String password = passwordController.text.trim();
@@ -116,7 +120,9 @@ class _SignUpPageState extends State<SignUpPage> {
         gravity: ToastGravity.BOTTOM,
         toastLength: Toast.LENGTH_LONG,
       );
+      return false;
     }
+    return true;
   }
 
   //lets create a custom email validator
@@ -128,7 +134,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
   //register the user
   void registerValidUser() {
-    if (validateForm()) {
+    if (!validateForm()) {
       signUP();
     }
   }
@@ -136,7 +142,7 @@ class _SignUpPageState extends State<SignUpPage> {
   //redirect the user
   void redirectToSignInPage() {
     Navigator.pushAndRemoveUntil(context,
-        MaterialPageRoute(builder: (e) => const SignIn()), (route) => false);
+        MaterialPageRoute(builder: (e) => const SignIn()), (route) => true);
   }
 
   @override
@@ -240,7 +246,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                         BigButton(
                           myNavigation: () {
-                            signUP();
+                            registerValidUser();
                           },
                           myText: 'Sign Up',
                         ),
