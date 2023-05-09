@@ -52,7 +52,7 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
-    bool _passwordvisibility = false;
+    bool passwordvisibility = false;
 
     return Scaffold(
       backgroundColor: Colors.transparent,
@@ -110,27 +110,35 @@ class _SignInState extends State<SignIn> {
                           const SizedBox(
                             height: 10,
                           ),
-                          MyTextField(
-                              icon: Icons.lock,
-                              label: 'Password',
-                              myTextType: TextInputType.text,
-                              myTextController: passwordController,
-                              hint: '*************',
-                              obscureText: !_passwordvisibility),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          Stack(
                             children: [
-                              GestureDetector(
-                                onTap: (){
-                                  setState(() {
-                                    _passwordvisibility = !_passwordvisibility;
-                                  });
-                                },
-                                child:  Icon( _passwordvisibility? Icons.visibility :
-                                  Icons.visibility_off,
-                                  size: 30,
-                                ),
-                              ),
+                              MyTextField(
+                                  icon: Icons.lock,
+                                  label: 'Password',
+                                  myTextType: TextInputType.text,
+                                  myTextController: passwordController,
+                                  hint: '*************',
+                                  obscureText: !passwordvisibility),
+                                Positioned(
+                                   right: 15,
+                                   bottom: 15,
+                                   child:
+                                SizedBox(child:
+                                GestureDetector(
+                                  onTap: (){
+                                    setState(() {
+                                      passwordvisibility = !passwordvisibility;
+                                    });
+                                  } ,
+                                  child: Icon( passwordvisibility
+                                      ? Icons.visibility
+                                      : Icons.visibility_off,),
+                                )))
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
                               TextButton(
                                 onPressed: signIn,
                                 child: const Text(
@@ -224,12 +232,8 @@ class _SignInState extends State<SignIn> {
                               ),
                               TextButton(
                                 onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const SignUpPage(),
-                                    ),
-                                  );
+                                  Get.to(const SignUpPage(), transition: Transition.fade,
+                                  duration: const Duration(seconds: 1));
                                 },
                                 child: const Text(
                                   'Sign Up',

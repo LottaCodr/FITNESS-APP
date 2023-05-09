@@ -3,10 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:the_trainer/User%20_Auth/Sign_in.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:the_trainer/User%20_Auth/Sign_up.dart';
 import 'package:the_trainer/firebase_options.dart';
 import 'package:the_trainer/screens/splash%20screen.dart';
-import 'package:the_trainer/widgets/navbar.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

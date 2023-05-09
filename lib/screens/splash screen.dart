@@ -33,7 +33,7 @@ class _MySplashScreenState extends State<MySplashScreen> {
           children: [
             Image.asset(
               'assets/runner.png',
-              scale: 70,
+              scale: 0.7,
             )
           ],
         ),

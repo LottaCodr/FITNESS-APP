@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:the_trainer/screens/challenges.dart';
 import 'package:the_trainer/screens/profile_page.dart';
 import 'package:the_trainer/widgets/chart/chart_container.dart';
@@ -42,15 +44,17 @@ class _HomePageState extends State<HomePage> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          Navigator.push(context, MaterialPageRoute(
-                              builder: (context) => Scaffold(
+                          Get.to(
+                              (Scaffold(
                                 appBar: AppBar(
                                   elevation: 0,
                                   backgroundColor: Colors.transparent,
                                 ),
-                                body: TheProfile(),
-                              )));
-                        },
+                                body: const TheProfile(),
+                              )),
+                              transition: Transition.fade,
+                              duration: const Duration(milliseconds: 650));
+                          },
                         child: const CircleAvatar(
                           backgroundColor: Colors.white,
                           radius: 35,
@@ -129,10 +133,9 @@ class _HomePageState extends State<HomePage> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const TheChallenges()));
+                    Get.to(const TheChallenges(), transition: Transition.fade,
+                    duration: const Duration(milliseconds: 650));
+
                   },
                   child: TaggedClippedContainer(
                     myImage: Image.asset('assets/maraton.jpg'),

@@ -2,10 +2,10 @@ import 'dart:ui';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 import 'package:the_trainer/User%20_Auth/Sign_in.dart';
-import 'package:the_trainer/main.dart';
 import 'package:the_trainer/widgets/MyTextField.dart';
+import '../main.dart';
 import '../widgets/big_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -65,14 +65,12 @@ class _SignUpPageState extends State<SignUpPage> {
         print(e);
       }
 //display error message to user
-      Fluttertoast.showToast(
-          msg: 'Failed to create account: ${e.message}',
-          gravity: ToastGravity.BOTTOM,
-          toastLength: Toast.LENGTH_SHORT);
+      Get.snackbar('Error:', 'Failed to create account ${e.message}',
+          backgroundColor: Colors.red);
     } finally {
       Navigator.pop(context);
     }
-    //navigatorKey.currentState!.popUntil((route) => route.isFirst);
+    navigatorKey.currentState!.popUntil((route) => route.isFirst);
   }
 
   //form validation
@@ -86,40 +84,37 @@ class _SignUpPageState extends State<SignUpPage> {
         email.isEmpty ||
         password.isEmpty ||
         phoneNumber.isEmpty) {
-      Fluttertoast.showToast(
-        msg: 'Please fill in the fields',
-        gravity: ToastGravity.BOTTOM,
-        toastLength: Toast.LENGTH_SHORT,
+      Get.snackbar(
+        'Error:',
+        'Please fill ALL the fields',
+        backgroundColor: Colors.red,
       );
     } else if (name.length < 3) {
-      Fluttertoast.showToast(
-        msg: 'Name must be at least 3 characters.',
-        gravity: ToastGravity.BOTTOM,
-        toastLength: Toast.LENGTH_SHORT,
+      Get.snackbar(
+        'Error:',
+        'Name must be at least 3 characters',
+        backgroundColor: Colors.red,
       );
     } else if (phoneNumber.length < 11 || phoneNumber.length > 11) {
-      Fluttertoast.showToast(
-          msg: 'Invalid Phone number',
-          gravity: ToastGravity.BOTTOM,
-          toastLength: Toast.LENGTH_SHORT);
+      Get.snackbar('Error:', 'Invalid Phone Number',
+          backgroundColor: Colors.red);
     } else if (!isValidEmail(email)) {
-      Fluttertoast.showToast(
-        msg: 'Invalid Email',
-        gravity: ToastGravity.BOTTOM,
-        toastLength: Toast.LENGTH_SHORT,
+      Get.snackbar(
+        'Error:',
+        'Invalid Email',
+        backgroundColor: Colors.red,
       );
     } else if (phoneNumber.length < 6) {
-      Fluttertoast.showToast(
-        msg: 'Must contain atleast 6 characters',
-        gravity: ToastGravity.BOTTOM,
-        toastLength: Toast.LENGTH_SHORT,
+      Get.snackbar(
+        'Error:',
+        'Must contain atleast 6 characters',
+        backgroundColor: Colors.red,
       );
     } else {
-      Fluttertoast.showToast(
-        msg: 'Your Account has been successfully created',
-        gravity: ToastGravity.BOTTOM,
-        toastLength: Toast.LENGTH_LONG,
-      );
+      Get.snackbar(
+          'Congratulation', 'Your Account has been successfully created',
+          backgroundColor: Colors.green);
+
       return false;
     }
     return true;
@@ -180,10 +175,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       children: [
                         IconButton(
                           onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const SignIn()));
+                            Get.back();
                           },
                           icon: const Icon(
                             Icons.arrow_back,
@@ -317,10 +309,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             ),
                             TextButton(
                               onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => const SignIn()));
+                                Get.back();
                               },
                               child: const Text(
                                 'Sign in',
