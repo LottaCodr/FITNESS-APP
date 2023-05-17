@@ -159,11 +159,16 @@ class _SignInState extends State<SignIn> {
                           const SizedBox(
                             height: 40,
                           ),
-                          BigButton(
-                            myNavigation: () {
-                              signIn();
-                            },
-                            myText: 'Sign In',
+                          AnimatedRotation(
+                            turns: 0.0,
+                            duration: const Duration(seconds: 3),
+                            curve: Curves.bounceIn,
+                            child: BigButton(
+                              myNavigation: () {
+                                signIn();
+                              },
+                              myText: 'Sign In',
+                            ),
                           ),
                           const SizedBox(
                             height: 25,

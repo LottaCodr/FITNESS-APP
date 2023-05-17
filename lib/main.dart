@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:the_trainer/User%20_Auth/Sign_in.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:the_trainer/firebase_options.dart';
+import 'package:the_trainer/screens/Onboarding_Screens/onboarding_screen.dart';
 import 'package:the_trainer/screens/splash%20screen.dart';
 
 void main() async {
@@ -14,6 +15,7 @@ void main() async {
 
   runApp(const MyApp());
 }
+
 final navigatorKey = GlobalKey<NavigatorState>();
 
 class MyApp extends StatelessWidget {

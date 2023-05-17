@@ -9,6 +9,7 @@ import 'package:the_trainer/widgets/tagged_clip_container.dart';
 import 'package:the_trainer/widgets/the_card.dart';
 import 'package:the_trainer/widgets/the_circle.dart';
 import 'package:the_trainer/widgets/the_text_row.dart';
+import 'package:the_trainer/widgets/video_player_widget.dart';
 
 import '../widgets/the_clip_containers.dart';
 
@@ -54,7 +55,7 @@ class _HomePageState extends State<HomePage> {
                               )),
                               transition: Transition.fade,
                               duration: const Duration(milliseconds: 650));
-                          },
+                        },
                         child: const CircleAvatar(
                           backgroundColor: Colors.white,
                           radius: 35,
@@ -118,24 +119,34 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(
                   height: 10,
                 ),
-                TheClipContainer(
-                  myImage: Image.asset('assets/work.jpg'),
-                  title: 'Get ready for Arms day',
-                  subTitle: '231 Members - Medium level',
+                GestureDetector(
+                  onTap: () {
+                    Get.to(Scaffold(
+                        appBar: AppBar(), body: const VideoPlayerWidget()));
+                  },
+                  child: TheClipContainer(
+                    myImage: Image.asset('assets/work.jpg'),
+                    title: 'Get ready for Arms day',
+                    subTitle: '231 Members - Medium level',
+                  ),
                 ),
                 const SizedBox(
                   height: 10,
                 ),
                 const TheTextRow(
-                    leftText: 'Active Challenge', rightText: 'See All'),
+                  leftText: 'Active Challenge',
+                  rightText: 'See All',
+                ),
                 const SizedBox(
                   height: 10,
                 ),
                 GestureDetector(
                   onTap: () {
-                    Get.to(const TheChallenges(), transition: Transition.fade,
-                    duration: const Duration(milliseconds: 650));
-
+                    Get.to(const TheChallenges(),
+                        transition: Transition.fade,
+                        duration: const Duration(
+                          milliseconds: 650,
+                        ));
                   },
                   child: TaggedClippedContainer(
                     myImage: Image.asset('assets/maraton.jpg'),

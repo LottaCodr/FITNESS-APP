@@ -3,6 +3,8 @@ import 'package:the_trainer/widgets/my_calendar.dart';
 import 'package:the_trainer/widgets/the_card.dart';
 import 'package:the_trainer/widgets/the_circle.dart';
 
+import '../widgets/myHeatmap.dart';
+
 class WorkoutInfo extends StatefulWidget {
   const WorkoutInfo({Key? key}) : super(key: key);
 
@@ -33,7 +35,8 @@ class _WorkoutInfoState extends State<WorkoutInfo> {
                   decoration: BoxDecoration(
                       color: Colors.blueGrey,
                       borderRadius: BorderRadius.circular(20)),
-                  child: Padding(
+                  child:
+                  Padding(
                     padding: const EdgeInsets.all(12),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -63,7 +66,8 @@ class _WorkoutInfoState extends State<WorkoutInfo> {
                 height: 5,
               ),
               const SizedBox(
-                child: WorkOutCalendarContainer(),
+                child: MyHeatMap()
+                //WorkOutCalendarContainer(),
               ),
               //the calendar
 

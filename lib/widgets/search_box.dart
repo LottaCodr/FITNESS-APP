@@ -64,13 +64,14 @@ class CustomSearchDelegate extends SearchDelegate {
       }
     }
     return ListView.builder(
-        itemCount: confirmQuery.length,
-        itemBuilder: (context, index) {
-          var result = confirmQuery[index];
-          return ListTile(
-            title: Text(result),
-          );
-        });
+      itemCount: confirmQuery.length,
+      itemBuilder: (context, index) {
+        var result = confirmQuery[index];
+        return ListTile(
+          title: Text(result),
+        );
+      },
+    );
 
     throw UnimplementedError();
   }
