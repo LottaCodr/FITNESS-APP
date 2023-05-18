@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:the_trainer/User%20_Auth/Sign_in.dart';
+import 'package:the_trainer/screens/Profile%20Creation/PersonalizedPlan.dart';
 import 'package:the_trainer/widgets/MyTextField.dart';
 import '../main.dart';
 import '../widgets/big_button.dart';
@@ -137,7 +138,7 @@ class _SignUpPageState extends State<SignUpPage> {
   //redirect the user
   void redirectToSignInPage() {
     Navigator.pushAndRemoveUntil(context,
-        MaterialPageRoute(builder: (e) => const SignIn()), (route) => true);
+        MaterialPageRoute(builder: (e) => const MyPlan()), (route) => true);
   }
 
   @override

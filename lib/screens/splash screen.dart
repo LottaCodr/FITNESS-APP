@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:the_trainer/screens/Profile%20Creation/PersonalizedPlan.dart';
 import '../widgets/navbar.dart';
 
 class MySplashScreen extends StatefulWidget {
@@ -12,9 +13,9 @@ class MySplashScreen extends StatefulWidget {
 
 class _MySplashScreenState extends State<MySplashScreen> {
   void startTimer() {
-    Timer(const Duration(seconds: 4), () {
+    Timer(const Duration(seconds: 2), () {
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (e) => const MyBottomNavBar()));
+          context, MaterialPageRoute(builder: (e) => const MyPlan()));
     });
   }
 
