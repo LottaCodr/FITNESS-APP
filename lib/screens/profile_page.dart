@@ -8,6 +8,8 @@ import 'package:the_trainer/widgets/profile_button.dart';
 import 'package:the_trainer/widgets/progressbar.dart';
 import 'package:get/get.dart';
 
+import 'Payment_System/PayMe.dart';
+
 class TheProfile extends StatefulWidget {
   const TheProfile({
     Key? key,
@@ -259,7 +261,13 @@ class _TheProfileState extends State<TheProfile> {
                     ProfileButton(
                       title: 'Favourites',
                       icon: Icons.favorite,
-                      myNavigator: () {},
+                      myNavigator: () {
+                        Get.to(
+                          const PayMe(),
+                          transition: Transition.fade,
+                          duration: const Duration(milliseconds: 650),
+                        );
+                      },
                     ),
                     ProfileButton(
                       title: 'Log Out',

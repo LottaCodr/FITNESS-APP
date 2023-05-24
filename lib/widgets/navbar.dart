@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:the_trainer/screens/home_page.dart';
 import 'package:the_trainer/screens/profile_page.dart';
 import 'package:the_trainer/screens/ProgressScreen.dart';
@@ -13,6 +14,23 @@ class MyBottomNavBar extends StatefulWidget {
 }
 
 class _MyBottomNavBarState extends State<MyBottomNavBar> {
+  Locale _locale = const Locale('en', 'US');
+
+
+  @override
+  void initState() {
+    super.initState();
+    SharedPreferences.getInstance().then((prefs) {
+      String? languageCode = prefs.getString('languageCode');
+      String? languageCountry = prefs.getString('languageCountry');
+
+      setState(() {
+        _locale = Locale(languageCode!, languageCountry);
+      });
+
+    });
+  }
+
   int _selectedIndex = 0;
 
   final _screens = [
